@@ -19,8 +19,7 @@ export class PageService {
     }
     private extractData(res: Response) {
         let body = res.json();
-        console.log(body);
-        return body.data || { };
+        return body.result || { };
     }
     private handleError (error: Response | any) {
         // In a real world app, you might use a remote logging infrastructure

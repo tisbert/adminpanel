@@ -10,8 +10,9 @@ import { Page } from '../../classes/page';
     providers:[PageService]
 })
 export class PageComponent implements OnInit {
-    private page: Page[];
+    private pageList: Page[];
     private errorMessage: string;
+    private result: {};
 
     constructor(private pageService: PageService) {}
     ngOnInit() {
@@ -22,10 +23,18 @@ export class PageComponent implements OnInit {
     getPages() {
         this.pageService.getPages()
             .subscribe(
-                page => this.page = page,
-                error =>  this.errorMessage = <any>error
+                // function(response) {
+                //     this.pageList = response;
+                // },
+                // function(error) { console.log("Error happened" + error)},
+                // function() {
+                //     console.log(this.pageList);
+                // }
+                // response => this.result = response,
+                result => this.pageList = result,
+                error =>  this.errorMessage = <any>error,
+                function() { console.log(this.pageList)}
             );
-        console.log(this.page);
     }
 
 }

@@ -12,7 +12,7 @@ connection.init();
 
 //routes
 app.use('/', page);
-app.use('/page', page);
+app.use('/api/page', page);
 
 app.use('*', function(req, res) {
     res.send('<h>Bad route, please try another URL</h>');
