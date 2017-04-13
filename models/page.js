@@ -11,7 +11,7 @@ function Page() {
                 }
                 if (!err) {
                     res.status = 200;
-                    return res.json({ result:result });
+                    return res.json(result);
                 } else {
                     res.status = 500;
                     return res.json({ "error" : "Server error" });
@@ -30,7 +30,7 @@ function Page() {
                 }
                 if (!err) {
                     res.status = 200;
-                    return res.json({ result:result });
+                    return res.json(result);
                 } else {
                     res.status = 500;
                     return res.json({"error" : "Server error" });
@@ -49,7 +49,7 @@ function Page() {
                 }
                 if (!err) {
                     res.status = 200;
-                    return res.json({ result:result });
+                    return res.json(result);
                 } else {
                     res.status = 500;
                     return res.json({ "error" : "Server error" });
@@ -68,7 +68,7 @@ function Page() {
                 }
                 if (!err) {
                     res.status = 200;
-                    return res.json({ result:result });
+                    return res.json(result);
                 } else {
                     res.status = 500;
                     return res.json({ "error" : "Server error" });
@@ -87,7 +87,7 @@ function Page() {
                 }
                 if (!err) {
                     res.status = 200;
-                    return res.json({ result:result });
+                    return res.json(result);
                 } else {
                     res.status = 500;
                     return res.json({ "error" : "Server error" });

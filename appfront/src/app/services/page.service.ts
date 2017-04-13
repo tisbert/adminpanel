@@ -13,25 +13,42 @@ export class PageService {
   constructor(private http: Http) { }
 
     getPages(): Observable<Page[]> {
-        return this.http.get(Settings.API_ENDPOINT + '/page')
+        return this.http.get(Settings.API_ENDPOINT + '/page/')
             .map(this.extractData)
             .catch(this.handleError);
     }
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.result || { };
+
+    getPage(id: number): Observable<Page[]> {
+        return this.http.get(Settings.API_ENDPOINT + '/page/' + id)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
-    private handleError (error: Response | any) {
-        // In a real world app, you might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
+
+    deletePage(id: number): Observable<Page[]> {
+        return this.http.delete(Settings.API_ENDPOINT + '/page/' + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    addPage (page: Page){
+        return this.http.post(Settings.API_ENDPOINT + '/page/', page)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    updatePage (page: Page){
+        return this.http.put(Settings.API_ENDPOINT + '/page/', page)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        let pages: Page[];
+        pages = res.json();
+        return pages;
+    }
+
+    private handleError (error: Response) {
+        return Observable.throw(error || 'Server Error');
     }
 }

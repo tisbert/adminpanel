@@ -1,45 +1,59 @@
 <app-page-header [heading]="'Page'" [icon]="'fa-table'"></app-page-header>
 <div class="row">
-  <div class="col col-xl-12 col-lg-12">
-    <div class="card mb-3">
-      <div class="card-header">Bordered table</div>
-      <div class="card-block table-responsive">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@TwBootstrap</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="col col-xl-12 col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header">Add Pages</div>
+            <form role="form" #pageForm="ngForm">
+                <fieldset class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" [(ngModel)]="page.title" name="title" placeholder="Enter a title" required>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Text</label>
+                    <textarea class="form-control" rows="3" [(ngModel)]="page.text" name="text" required></textarea>
+                </fieldset>
+
+                <!-- Button (Double) -->
+                <div class="form-group align-middle">
+                    <div class="col-md-8">
+                        <button class="btn btn-danger" (click)="clearForm()" >Cancel</button>
+                        <button class="btn btn-success" (click)="pageSave()">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
+
+<div class="row">
+    <div class="col col-xl-12 col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header">Pages</div>
+            <div class="card-block table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th width="80%">Title</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let page of pageList; let i = index">
+                        <td>{{page.id}}</td>
+                        <td class="central">{{page.title}}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="editPage(page.id)">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" (click)="deletePage(page.id)">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

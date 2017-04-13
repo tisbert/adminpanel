@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/api/page', function(req, res) {
-    res.header('Access-Control-Allow-Origin', "*");
+    // res.header('Access-Control-Allow-Origin', "*");
     res.header('Content-Type', 'application/json');
     page.get(res);
 });
