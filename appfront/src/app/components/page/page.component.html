@@ -11,13 +11,9 @@
 
                 <fieldset class="form-group">
                     <label>Text</label>
-                    <!--
-                    <textarea class="form-control" rows="3" [(ngModel)]="page.text" name="text" required></textarea>
-                    -->
-                    <app-tinymce></app-tinymce>
+                    <app-tinymce [(ngModel)]="page.text" name="text"></app-tinymce>
                 </fieldset>
 
-                <!-- Button (Double) -->
                 <div class="form-group align-middle">
                     <div class="col-md-8">
                         <button class="btn btn-danger" (click)="clearForm()" >Cancel</button>
