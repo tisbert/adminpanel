@@ -1,8 +1,8 @@
-<app-page-header [heading]="'Page'" [icon]="'fa-table'"></app-page-header>
+<app-page-header [heading]="'Pages'" [icon]="'fa-table'"></app-page-header>
 <div class="row">
     <div class="col col-xl-12 col-lg-12">
         <div class="card mb-3">
-            <div class="card-header">Add Pages</div>
+            <div class="card-header">{{page.id ? 'Edit' : 'Add'}} Pages</div>
             <form role="form" #pageForm="ngForm">
                 <fieldset class="form-group">
                     <label>Title</label>
