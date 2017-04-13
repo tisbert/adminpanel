@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TinymceModule } from 'angular2-tinymce';
 import { PageComponent } from './page.component';
 import { PageRoutingModule } from './page-routing.module';
 import { PageHeaderModule } from './../../shared';
@@ -10,7 +11,9 @@ import { PageHeaderModule } from './../../shared';
         CommonModule,
         FormsModule,
         PageRoutingModule,
-        PageHeaderModule
+        PageHeaderModule,
+        TinymceModule.withConfig({})
+
     ],
     declarations: [PageComponent]
 })
