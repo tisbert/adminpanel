@@ -17,6 +17,7 @@ app.use('/', page);
 app.use('/api/page', page);
 app.use('/api/upload', upload);
 
+
 app.use('*', function(req, res) {
     res.send('<h>Bad route, please try another URL</h>');
 });
