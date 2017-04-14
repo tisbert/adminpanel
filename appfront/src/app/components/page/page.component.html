@@ -11,13 +11,28 @@
 
                 <fieldset class="form-group">
                     <label>Text</label>
-                    <app-tinymce [(ngModel)]="page.text" name="text"></app-tinymce>
+                    <app-tinymce [(ngModel)]="page.text" name="text" required></app-tinymce>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>Images</label>
+                    <div class="form-group align-middle">
+                        <div class="col-md-8">
+                            <input class="form-control" type="file" [(ngModel)]="page.files" name="files[]"
+                                   (change)="fileChangeEvent($event)" placeholder="Upload file..."
+                                   accept="image/x-png,image/gif,image/jpeg" multiple />
+                            <br>
+                        </div>
+                        <div class="col-md-8">
+                            <button class="btn btn-danger" (click)="upload()" >Upload</button>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <div class="form-group align-middle">
                     <div class="col-md-8">
-                        <button class="btn btn-danger" (click)="clearForm()" >Cancel</button>
-                        <button class="btn btn-success" (click)="pageSave()">Save</button>
+                        <button class="btn btn-danger" (click)="pageCancel()" >Cancel</button>
+                        <button class="btn btn-success" (click)="pageSave()" [disabled]="!pageForm.form.valid">Save</button>
                     </div>
                 </div>
             </form>

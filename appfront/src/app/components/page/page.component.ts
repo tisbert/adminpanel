@@ -15,14 +15,48 @@ export class PageComponent implements OnInit {
     private page: Page;
     private errorMessage: any;
     private result: any;
+    filesToUpload: Array<File>;
 
     constructor(private pageService: PageService) {
+        this.page = new Page;
+        this.filesToUpload = [];
     }
 
     ngOnInit() {
-        this.page = new Page;
         this.getPages();
+    }
 
+    upload() {
+        this.makeFileRequest("http://localhost:4200/api/upload", [], this.filesToUpload).then((result) => {
+            console.log(result);
+        }, (error) => {
+            console.error(error);
+        });
+    }
+
+    fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>> fileInput.target.files;
+    }
+
+    makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for(var i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
     }
 
     getPages() {
@@ -61,7 +95,7 @@ export class PageComponent implements OnInit {
                         error => this.errorMessage = <any>error,
                         () => {
                             this.getPages();
-                            this.clearForm();
+                            this.pageCancel();
                         }
                     );
             }else {
@@ -71,7 +105,7 @@ export class PageComponent implements OnInit {
                         error => this.errorMessage = <any>error,
                         () => {
                             this.getPages();
-                            this.clearForm();
+                            this.pageCancel();
                         }
                     );
             }
@@ -80,13 +114,13 @@ export class PageComponent implements OnInit {
 
     editPage(id: number) {
         this.getPage(id);
-
     }
 
-    clearForm() {
+    pageCancel() {
         this.page.id = null;
         this.page.title = "";
         this.page.text = "";
+        this.page.files = [];
     }
 
 }
